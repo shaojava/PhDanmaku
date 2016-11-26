@@ -27,3 +27,4 @@ create table client(
     history int,
     UNIQUE(cid)
 );
+
