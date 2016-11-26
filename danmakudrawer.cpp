@@ -1,6 +1,9 @@
 #include "danmakudrawer.h"
 #include "ui_danmakudrawer.h"
 #include "mainwindow.h"
+#ifdef Q_OS_WIN32
+#include "Windows.h"
+#endif
 
 DanmakuDrawer::DanmakuDrawer(QWidget *parent) : QWidget(parent), ui(new Ui::DanmakuDrawer){
     setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -26,6 +29,17 @@ void DanmakuDrawer::showEvent(QShowEvent* event){
 }
 
 void DanmakuDrawer::getDanmaku(){
+    #ifdef  Q_OS_WIN32
+    SetWindowPos(
+                (HWND)this->winId(),
+                HWND_TOPMOST,
+                this->pos().x(),
+                this->pos().y(),
+                this->width(),
+                this->height(),
+                SWP_SHOWWINDOW
+                );
+    #endif
     if(isprocessing == false){
         isprocessing = true;
         reply = qnam.get(QNetworkRequest(url));

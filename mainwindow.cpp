@@ -26,7 +26,7 @@ void MainWindow::checkClientRegister(){
     if(reply->readAll() == "success"){
         screenSize = desktop.availableGeometry(this);
         ddw.setGeometry(screenSize);
-        ddw.showMaximized();
+        ddw.showFullScreen();
         this->showMinimized();
     }else{
         msgbox.setText("Register Error!");
